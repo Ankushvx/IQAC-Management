@@ -13,17 +13,21 @@ class CustomTheme with ChangeNotifier {
 
   static ThemeData get lightTheme {
     return ThemeData(
-        primarySwatch: Colors.cyan,
-        brightness: Brightness.light,
-        //  canvasColor: Colors.deepPurple,
-        scaffoldBackgroundColor: Colors.white,
-        textTheme: TextTheme(bodyMedium: TextStyle(color: Colors.amberAccent)));
+      primaryColor: Colors.black,
+      brightness: Brightness.light,
+      secondaryHeaderColor: Colors.amberAccent,
+      //  canvasColor: Colors.cyan,
+      scaffoldBackgroundColor: Colors.white,
+      colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.amber)
+          .copyWith(secondary: Colors.amber),
+    );
   }
 
   static ThemeData get darkTheme {
     return ThemeData(
-      primarySwatch: Colors.red,
-      primaryColor: Colors.cyan,
+      primarySwatch: Colors.blueGrey,
+      primaryColor: Colors.white,
+      secondaryHeaderColor: Colors.amberAccent,
       brightness: Brightness.dark,
       scaffoldBackgroundColor: Colors.blueGrey,
     );
