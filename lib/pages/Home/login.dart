@@ -8,17 +8,17 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     // ignore: sized_box_for_whitespace
     return DefaultTabController(
-      length: 5,
+      length: 0,
       //initialIndex: tabIndex,
       child: Scaffold(
         body: TabBarView(
           physics: const NeverScrollableScrollPhysics(),
           children: [
-            Container(color: Colors.white),
-            Container(color: Colors.red),
-            Container(color: Colors.red),
-            Container(color: Colors.yellow),
-            Container(color: Colors.cyan),
+            //   Container(color: Colors.deepPurple),
+            // Container(color: Colors.red),
+            // Container(color: Colors.red),
+            // Container(color: Colors.yellow),
+            // Container(color: Colors.cyan),
           ],
         ),
         //   bottomNavigationBar: const TabBar(

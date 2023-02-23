@@ -6,8 +6,8 @@ import 'package:portfilioapp/pages/Home/user.dart';
 import 'themes.dart';
 
 class MainPage extends StatefulWidget {
-  const MainPage({super.key, required this.title});
-  final String title;
+  const MainPage({super.key});
+  final String title = "Hello";
   @override
   State<MainPage> createState() => _MainPageState();
 }
@@ -29,13 +29,13 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     /// const color = Colors.black;
-    final theme = Theme.of(context);
+    final _theme = Theme.of(context);
     return Scaffold(
       //backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(
           widget.title,
-          style: TextStyle(color: theme.canvasColor),
+          style: TextStyle(color: _theme.primaryColor),
         ),
         actions: [
           IconButton(
@@ -52,11 +52,13 @@ class _MainPageState extends State<MainPage> {
             Container(
               width: double.infinity,
               child: const DrawerHeader(
-                decoration: BoxDecoration(color: Colors.amberAccent),
+                // ignore: deprecated_member_use
+                //  decoration: BoxDecoration(color: _theme.accentColor),
                 child: Text(
                   'Side Menu',
                   style: TextStyle(
-                      color: Colors.white,
+                      fontFamily: 'Loto',
+                      //  color: Colors.white,
                       fontSize: 25,
                       overflow: TextOverflow.fade),
                 ),
@@ -67,11 +69,15 @@ class _MainPageState extends State<MainPage> {
                 child: ListTile(
                   leading: const Icon(
                     Icons.input,
-                    color: Colors.cyan,
+                    // color: Colors.cyan,
                   ),
                   title: const Text("Welcome",
                       selectionColor: Colors.cyan,
-                      style: TextStyle(fontSize: 20, color: Colors.cyan)),
+                      style: TextStyle(
+                        fontFamily: 'Raleway',
+                        fontSize: 20,
+                        //color: Colors.cyan
+                      )),
                   //  tileColor: Colors.cyan,
                   onTap: () {
                     //Navigator.pop(context);
@@ -86,28 +92,23 @@ class _MainPageState extends State<MainPage> {
                 child: Column(
                   children: [
                     Divider(
-                      color: Colors.cyanAccent,
-                    ),
+                        //  color: Colors.cyanAccent,
+                        ),
                     ListTile(
+                      contentPadding: EdgeInsetsDirectional.only(
+                        start: 10.0,
+                        bottom: 20.0,
+                      ),
                       title: const Text("Logout",
-                          style: TextStyle(fontSize: 20, color: Colors.cyan)),
-
+                          style: TextStyle(
+                            fontSize: 20,
+                            //color: Colors.cyan
+                          )),
                       leading: const Icon(
                         Icons.exit_to_app,
-                        color: Colors.cyan,
+                        //  color: Colors.cyan,
                       ),
                       //  tileColor: Colors.cyan,
-                      onTap: () {
-                        //Navigator.pop(context);
-                      },
-                    ),
-                    ListTile(
-                      // leading: const Icon(Icons.),
-                      title: const Text(
-                        "Welcome",
-                        //   style: TextStyle(fontSize: 20, color: Colors.white)
-                      ),
-                      // tileColor: Colors.cyan,
                       onTap: () {
                         //Navigator.pop(context);
                       },
@@ -128,8 +129,8 @@ class _MainPageState extends State<MainPage> {
           // backgroundColor: Colors.teal,
           onTap: onTap,
           currentIndex: currentindex,
-          selectedItemColor: Colors.cyan,
-          unselectedItemColor: Colors.cyan.withOpacity(0.6),
+          selectedItemColor: Colors.amber,
+          unselectedItemColor: Colors.amber.withOpacity(0.5),
           showUnselectedLabels: true,
           showSelectedLabels: true,
           elevation: 0,
@@ -139,8 +140,11 @@ class _MainPageState extends State<MainPage> {
             BottomNavigationBarItem(
                 tooltip: "Home", label: "Home", icon: Icon(Icons.apps)),
             BottomNavigationBarItem(
-                label: "Bar", icon: Icon(Icons.bar_chart_sharp)),
-            BottomNavigationBarItem(label: "User", icon: Icon(Icons.person))
+                tooltip: "Home",
+                label: "Bar",
+                icon: Icon(Icons.bar_chart_sharp)),
+            BottomNavigationBarItem(
+                tooltip: "User", label: "User", icon: Icon(Icons.person))
           ]),
     );
   }
