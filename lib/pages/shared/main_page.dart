@@ -7,23 +7,19 @@ import 'themes.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
+
   final String title = "Hello";
+
   @override
   State<MainPage> createState() => _MainPageState();
 }
 
 class _MainPageState extends State<MainPage> {
-  List pages = [
-    const LoginPage(),
-    const HomePage(),
-    const UserPage(),
-    const AttendancePage()
-  ];
   int currentindex = 0;
+  final PageController _pageController = PageController();
+
   void onTap(int index) {
-    setState(() {
-      currentindex = index;
-    });
+    _pageController.animateToPage(index, duration: const Duration(milliseconds: 300), curve: Curves.bounceInOut);
   }
 
   @override
@@ -120,7 +116,15 @@ class _MainPageState extends State<MainPage> {
           ],
         ),
       ),
-      body: pages[currentindex],
+      body: PageView(
+        onPageChanged: (index){
+          setState(() {
+            currentindex = index;
+          });
+        },
+        controller: _pageController,
+        children: const [LoginPage(), HomePage(), UserPage(), AttendancePage()],
+      ),
       bottomNavigationBar: BottomNavigationBar(
           unselectedFontSize: 13,
           selectedFontSize: 13,
@@ -135,16 +139,10 @@ class _MainPageState extends State<MainPage> {
           showSelectedLabels: true,
           elevation: 0,
           items: const [
-            BottomNavigationBarItem(
-                tooltip: "Menu", label: "Menu", icon: Icon(Icons.menu)),
-            BottomNavigationBarItem(
-                tooltip: "Home", label: "Home", icon: Icon(Icons.apps)),
-            BottomNavigationBarItem(
-                tooltip: "Home",
-                label: "Bar",
-                icon: Icon(Icons.bar_chart_sharp)),
-            BottomNavigationBarItem(
-                tooltip: "User", label: "User", icon: Icon(Icons.person))
+            BottomNavigationBarItem(tooltip: "Menu", label: "Menu", icon: Icon(Icons.menu)),
+            BottomNavigationBarItem(tooltip: "Home", label: "Home", icon: Icon(Icons.apps)),
+            BottomNavigationBarItem(tooltip: "Home", label: "Bar", icon: Icon(Icons.bar_chart_sharp)),
+            BottomNavigationBarItem(tooltip: "User", label: "User", icon: Icon(Icons.person))
           ]),
     );
   }

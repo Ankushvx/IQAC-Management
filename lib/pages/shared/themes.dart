@@ -4,6 +4,7 @@ CustomTheme currentTheme = CustomTheme();
 
 class CustomTheme with ChangeNotifier {
   static bool _isDarkTheme = false;
+
   ThemeMode get currentTheme => _isDarkTheme ? ThemeMode.dark : ThemeMode.light;
 
   void toggleTheme() {
@@ -13,14 +14,16 @@ class CustomTheme with ChangeNotifier {
 
   static ThemeData get lightTheme {
     return ThemeData(
-        primarySwatch: Colors.indigo,
-        primaryColor: Colors.amber,
-        bannerTheme: MaterialBannerThemeData(
-            backgroundColor: Color.fromARGB(44, 12, 138, 111)),
-        brightness: Brightness.light,
-        //  canvasColor: Colors.deepPurple,
-        scaffoldBackgroundColor: Colors.white,
-        textTheme: TextTheme(bodyMedium: TextStyle(color: Colors.amberAccent)));
+      primarySwatch: Colors.indigo,
+      primaryColor: Colors.indigo,
+      bannerTheme: MaterialBannerThemeData(backgroundColor: Color.fromARGB(44, 12, 138, 111)),
+      brightness: Brightness.light,
+      //  canvasColor: Colors.deepPurple,
+      scaffoldBackgroundColor: Colors.white,
+      textTheme: TextTheme(
+        bodyMedium: TextStyle(color: Colors.black),
+      ),
+    );
   }
 
   static ThemeData get darkTheme {
@@ -30,6 +33,9 @@ class CustomTheme with ChangeNotifier {
       secondaryHeaderColor: Colors.amberAccent,
       brightness: Brightness.dark,
       scaffoldBackgroundColor: Color.fromARGB(255, 77, 88, 94),
+      textTheme: TextTheme(
+        bodyMedium: TextStyle(color: Colors.white),
+      ),
     );
   }
 }

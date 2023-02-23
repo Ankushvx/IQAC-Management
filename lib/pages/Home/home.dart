@@ -2,10 +2,12 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:http/http.dart' as http;
 import 'package:portfilioapp/constants/apiconstants.dart';
 import 'package:portfilioapp/models/eventmodel.dart';
 import 'package:portfilioapp/models/usermodel.dart';
+import 'package:portfilioapp/utils/http_utils.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -14,96 +16,125 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
-  late List<EventModel>? _eventModel = [];
-  late List<UserModel>? _userModel = [];
+class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin<HomePage> {
+  UserModel? _userModel;
+  bool _isLoading = false;
+
+
+  @override
+  bool get wantKeepAlive => true;
+
   @override
   void initState() {
     super.initState();
     _getData();
   }
 
-  void _getData() async {
-    _userModel = (await ApisService().getUser())!;
-    Future.delayed(Duration(seconds: 1)).then((value) => setState(() {}));
+  void _getData() {
+    setState(() {
+      _isLoading = true;
+    });
+
+    ApisService().getUser().then((value) {
+      setState(() {
+        _userModel = value;
+      });
+    }).whenComplete(() {
+      setState(() {
+        _isLoading = false;
+      });
+    });
+  }
+
+  TableRow _createRow(String name, String value) {
+    return TableRow(children: [
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        child: TableCell(child: Text(name)),
+      ),
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        child: TableCell(child: Text(value)),
+      ),
+    ]);
   }
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
+
+    if (_isLoading) {
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
+    }
+
+    if (_userModel == null) {
+      return const Center(
+        child: Text(
+          "Failed to load student details.",
+        ),
+      );
+    }
+
+    final userModel = _userModel!;
+
     return Scaffold(
-      body: _userModel == null || _userModel!.isEmpty
-          ? const Center(
-              child: CircularProgressIndicator(),
-            )
-          : ListView.builder(
-              itemCount: _userModel!.length,
-              itemBuilder: (context, index) {
-                return Card(
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Text(_userModel![index].studentID.toString()),
-                          Text(_userModel![index].studentName)
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 20.0,
-                      ),
-                      // Row(
-                      //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      //   children: [
-                      //     Text(_userModel![index].enrollmentNo.toString()),
-                      //     Text(_userModel![index].fatherName)
-                      //   ],
-                      // )
-                    ],
-                  ),
-                );
-              }),
+      body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        padding: const EdgeInsets.all(15),
+        child: Card(
+          child: Table(
+            border: TableBorder.all(color: Colors.grey),
+            children: [
+              _createRow("Student Name", userModel.studentName),
+              _createRow("Father's Name", userModel.fatherName),
+              _createRow("Enrollment No.", userModel.enrollmentNo),
+              _createRow("Gender", userModel.gender),
+              _createRow("DOB", userModel.dateOfBirth),
+              _createRow("Student Name", userModel.studentName),
+              _createRow("Father's Name", userModel.fatherName),
+              _createRow("Enrollment No.", userModel.enrollmentNo),
+              _createRow("Gender", userModel.gender),
+              _createRow("DOB", userModel.dateOfBirth),
+              _createRow("Student Name", userModel.studentName),
+              _createRow("Father's Name", userModel.fatherName),
+              _createRow("Enrollment No.", userModel.enrollmentNo),
+              _createRow("Gender", userModel.gender),
+              _createRow("DOB", userModel.dateOfBirth),
+              _createRow("Student Name", userModel.studentName),
+              _createRow("Father's Name", userModel.fatherName),
+              _createRow("Enrollment No.", userModel.enrollmentNo),
+              _createRow("Gender", userModel.gender),
+              _createRow("DOB", userModel.dateOfBirth),
+              _createRow("Student Name", userModel.studentName),
+              _createRow("Father's Name", userModel.fatherName),
+              _createRow("Enrollment No.", userModel.enrollmentNo),
+              _createRow("Gender", userModel.gender),
+              _createRow("DOB", userModel.dateOfBirth),
+              _createRow("Student Name", userModel.studentName),
+              _createRow("Father's Name", userModel.fatherName),
+              _createRow("Enrollment No.", userModel.enrollmentNo),
+              _createRow("Gender", userModel.gender),
+              _createRow("DOB", userModel.dateOfBirth),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
 
 class ApisService {
-  Future<List<UserModel>?> getUser() async {
-    // try {
-    // ignore: prefer_interpolation_to_compose_strings
-    var url = Uri.parse(
-        ApiConstants.baseURL + ApiConstants.userEndpoint + '?StudentId=22509');
-    var url1 = Uri.parse(ApiConstants.baseURL + ApiConstants.getEventList);
-    var response = await http.post(
-      url,
-      headers: {
-        'accept': 'application/json',
-        HttpHeaders.authorizationHeader:
-            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBTktVU0ggVkVSTUEiLCJlbWFpbCI6IiIsIlVzZXJJZCI6IjIyNTA5IiwiZXhwIjoxNjc2OTEyNjY1LCJpc3MiOiJUZXN0LmNvbSIsImF1ZCI6IlRlc3QuY29tIn0.05Kgf94KFpCTWKbuKw28510sFC_j168bo7BWBQ3DsRs',
-      },
-    );
-    if (response.statusCode == 200) {
-      List<UserModel> _model = userModelFromJson(response.body);
-      return _model.toList();
+  Future<UserModel?> getUser() async {
+    var response = await HttpUtils.postRequest(url: ApiConstants.USER_PROFILE, queryParameters: {
+      "StudentId": 22509,
+    });
+
+    if (response == null || response.data == null) {
+      return null;
     }
-    // Uri.parse('http://192.168.60.7:93/api/v1/Common/ddlCollegeList'),
-    // Uri.parse(
-    //     'http://192.168.60.7:93/api/v1/Student/getStudentProfile?StudentId=22509'),
-    // Send authorization headers to the backend.
-    // headers: {
-    //   HttpHeaders.authorizationHeader:
-    //       'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJBTktVU0ggVkVSTUEiLCJlbWFpbCI6IiIsIlVzZXJJZCI6IjIyNTA5IiwiZXhwIjoxNjc2OTEyNjY1LCJpc3MiOiJUZXN0LmNvbSIsImF1ZCI6IlRlc3QuY29tIn0.05Kgf94KFpCTWKbuKw28510sFC_j168bo7BWBQ3DsRs',
-    // },
-    // );
-    // print(response.body);
-    // final parsed =
-    //     json.decode(response.body)['data'].cast<Map<String, dynamic>>();
-    // final responseJson = jsonDecode(response.body) as Map;
-    // final data = parsed['data'] as Post;
-    // return parsed.map<Post>((json) => Post.fromMap(json)).toList();
-    //return data;
-    // }
-    // catch (x) {
-    //   log(null) ;
-    // }
+
+    return UserModel.fromJson(response.data);
   }
 }
