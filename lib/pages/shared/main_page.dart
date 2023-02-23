@@ -6,8 +6,8 @@ import 'package:portfilioapp/pages/Home/user.dart';
 import 'themes.dart';
 
 class MainPage extends StatefulWidget {
-  const MainPage({super.key, required this.title});
-  final String title;
+  const MainPage({super.key});
+  //final String title;
   @override
   State<MainPage> createState() => _MainPageState();
 }
@@ -34,7 +34,7 @@ class _MainPageState extends State<MainPage> {
       //backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(
-          widget.title,
+          "Flutter",
           style: TextStyle(color: theme.canvasColor),
         ),
         actions: [
@@ -49,10 +49,10 @@ class _MainPageState extends State<MainPage> {
         child: Column(
           children: [
             //       // ignore: sort_child_properties_last
-            Container(
+            const SizedBox(
               width: double.infinity,
-              child: const DrawerHeader(
-                decoration: BoxDecoration(color: Colors.amberAccent),
+              child: DrawerHeader(
+                decoration: BoxDecoration(color: Colors.teal),
                 child: Text(
                   'Side Menu',
                   style: TextStyle(
@@ -70,8 +70,8 @@ class _MainPageState extends State<MainPage> {
                     color: Colors.cyan,
                   ),
                   title: const Text("Welcome",
-                      selectionColor: Colors.cyan,
-                      style: TextStyle(fontSize: 20, color: Colors.cyan)),
+                      selectionColor: Colors.teal,
+                      style: TextStyle(fontSize: 20, color: Colors.teal)),
                   //  tileColor: Colors.cyan,
                   onTap: () {
                     //Navigator.pop(context);

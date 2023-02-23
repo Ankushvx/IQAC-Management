@@ -13,7 +13,10 @@ class CustomTheme with ChangeNotifier {
 
   static ThemeData get lightTheme {
     return ThemeData(
-        primarySwatch: Colors.cyan,
+        primarySwatch: Colors.indigo,
+        primaryColor: Colors.amber,
+        bannerTheme: MaterialBannerThemeData(
+            backgroundColor: Color.fromARGB(44, 12, 138, 111)),
         brightness: Brightness.light,
         //  canvasColor: Colors.deepPurple,
         scaffoldBackgroundColor: Colors.white,
@@ -25,7 +28,7 @@ class CustomTheme with ChangeNotifier {
       primarySwatch: Colors.red,
       primaryColor: Colors.cyan,
       brightness: Brightness.dark,
-      scaffoldBackgroundColor: Colors.blueGrey,
+      scaffoldBackgroundColor: Color.fromARGB(255, 77, 88, 94),
     );
   }
 }
