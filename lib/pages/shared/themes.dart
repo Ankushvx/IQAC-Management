@@ -13,14 +13,14 @@ class CustomTheme with ChangeNotifier {
 
   static ThemeData get lightTheme {
     return ThemeData(
-      primaryColor: Colors.black,
-      brightness: Brightness.light,
-      secondaryHeaderColor: Colors.amberAccent,
-      //  canvasColor: Colors.cyan,
-      scaffoldBackgroundColor: Colors.white,
-      colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.amber)
-          .copyWith(secondary: Colors.amber),
-    );
+        primarySwatch: Colors.indigo,
+        primaryColor: Colors.amber,
+        bannerTheme: MaterialBannerThemeData(
+            backgroundColor: Color.fromARGB(44, 12, 138, 111)),
+        brightness: Brightness.light,
+        //  canvasColor: Colors.deepPurple,
+        scaffoldBackgroundColor: Colors.white,
+        textTheme: TextTheme(bodyMedium: TextStyle(color: Colors.amberAccent)));
   }
 
   static ThemeData get darkTheme {
@@ -29,7 +29,7 @@ class CustomTheme with ChangeNotifier {
       primaryColor: Colors.white,
       secondaryHeaderColor: Colors.amberAccent,
       brightness: Brightness.dark,
-      scaffoldBackgroundColor: Colors.blueGrey,
+      scaffoldBackgroundColor: Color.fromARGB(255, 77, 88, 94),
     );
   }
 }
