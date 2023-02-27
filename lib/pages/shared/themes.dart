@@ -15,12 +15,16 @@ class CustomTheme with ChangeNotifier {
   static ThemeData get lightTheme {
     return ThemeData(
       primarySwatch: Colors.indigo,
-      primaryColor: Colors.indigo,
-      bannerTheme: MaterialBannerThemeData(backgroundColor: Color.fromARGB(44, 12, 138, 111)),
+      primaryColor: Colors.white,
+      bannerTheme: const MaterialBannerThemeData(
+          backgroundColor: Color.fromARGB(44, 12, 138, 111)),
       brightness: Brightness.light,
-      //  canvasColor: Colors.deepPurple,
+      secondaryHeaderColor: Colors.indigo,
+      //canvasColor: Colors.deepPurple,
       scaffoldBackgroundColor: Colors.white,
-      textTheme: TextTheme(
+      textTheme: const TextTheme(
+        displayLarge: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
+        titleLarge: TextStyle(fontSize: 26.0, fontStyle: FontStyle.italic),
         bodyMedium: TextStyle(color: Colors.black),
       ),
     );
@@ -30,11 +34,13 @@ class CustomTheme with ChangeNotifier {
     return ThemeData(
       primarySwatch: Colors.blueGrey,
       primaryColor: Colors.white,
-      secondaryHeaderColor: Colors.amberAccent,
+      secondaryHeaderColor: Colors.blueGrey,
       brightness: Brightness.dark,
-      scaffoldBackgroundColor: Color.fromARGB(255, 77, 88, 94),
-      textTheme: TextTheme(
-        bodyMedium: TextStyle(color: Colors.white),
+      scaffoldBackgroundColor: Color.fromARGB(255, 53, 56, 57),
+      textTheme: const TextTheme(
+        bodyMedium: TextStyle(color: Colors.indigoAccent, fontSize: 15.0),
+        displayLarge: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
+        titleLarge: TextStyle(fontSize: 26.0, fontStyle: FontStyle.italic),
       ),
     );
   }

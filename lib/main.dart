@@ -34,7 +34,7 @@ class _MyAppState extends State<MyApp> {
       themeMode: currentTheme.currentTheme,
       theme: CustomTheme.lightTheme,
       darkTheme: CustomTheme.darkTheme,
-      home: MainPage(),
+      home: const MainPage(),
     );
   }
 }

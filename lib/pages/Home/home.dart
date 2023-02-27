@@ -1,8 +1,4 @@
-import 'dart:convert';
-import 'dart:io';
-import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:http/http.dart' as http;
 import 'package:portfilioapp/constants/apiconstants.dart';
 import 'package:portfilioapp/models/eventmodel.dart';
@@ -16,10 +12,10 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin<HomePage> {
+class _HomePageState extends State<HomePage>
+    with AutomaticKeepAliveClientMixin<HomePage> {
   UserModel? _userModel;
   bool _isLoading = false;
-
 
   @override
   bool get wantKeepAlive => true;
@@ -48,14 +44,48 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin<
 
   TableRow _createRow(String name, String value) {
     return TableRow(children: [
-      Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-        child: TableCell(child: Text(name)),
+      Row(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              name,
+              style:
+                  const TextStyle(fontWeight: FontWeight.normal, fontSize: 12),
+            ),
+          ),
+        ],
       ),
-      Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-        child: TableCell(child: Text(value)),
+      Row(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              value,
+              style:
+                  const TextStyle(fontWeight: FontWeight.normal, fontSize: 12),
+            ),
+          ),
+        ],
       ),
+
+      //TableCell(child: Text(name)),
+      // TableCell(child: Text(value))
+      // Padding(
+      //   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      //   child: Builder(builder: (context) {
+      //     return TableCell(verticalAlignment: null, child: Text(name));
+      //   }),
+      // ),
+      // Padding(
+      //   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      //   child: Builder(builder: (context) {
+      //     return TableCell(
+      //       verticalAlignment: null,
+      //       child: Text(value),
+      //     );
+      //   }),
+      // ),
     ]);
   }
 
@@ -85,33 +115,15 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin<
         padding: const EdgeInsets.all(15),
         child: Card(
           child: Table(
-            border: TableBorder.all(color: Colors.grey),
+            textDirection: TextDirection.ltr,
+            border: TableBorder.all(
+              style: BorderStyle.solid,
+              color: Colors.grey,
+              borderRadius: const BorderRadius.all(
+                Radius.circular(15),
+              ),
+            ),
             children: [
-              _createRow("Student Name", userModel.studentName),
-              _createRow("Father's Name", userModel.fatherName),
-              _createRow("Enrollment No.", userModel.enrollmentNo),
-              _createRow("Gender", userModel.gender),
-              _createRow("DOB", userModel.dateOfBirth),
-              _createRow("Student Name", userModel.studentName),
-              _createRow("Father's Name", userModel.fatherName),
-              _createRow("Enrollment No.", userModel.enrollmentNo),
-              _createRow("Gender", userModel.gender),
-              _createRow("DOB", userModel.dateOfBirth),
-              _createRow("Student Name", userModel.studentName),
-              _createRow("Father's Name", userModel.fatherName),
-              _createRow("Enrollment No.", userModel.enrollmentNo),
-              _createRow("Gender", userModel.gender),
-              _createRow("DOB", userModel.dateOfBirth),
-              _createRow("Student Name", userModel.studentName),
-              _createRow("Father's Name", userModel.fatherName),
-              _createRow("Enrollment No.", userModel.enrollmentNo),
-              _createRow("Gender", userModel.gender),
-              _createRow("DOB", userModel.dateOfBirth),
-              _createRow("Student Name", userModel.studentName),
-              _createRow("Father's Name", userModel.fatherName),
-              _createRow("Enrollment No.", userModel.enrollmentNo),
-              _createRow("Gender", userModel.gender),
-              _createRow("DOB", userModel.dateOfBirth),
               _createRow("Student Name", userModel.studentName),
               _createRow("Father's Name", userModel.fatherName),
               _createRow("Enrollment No.", userModel.enrollmentNo),
@@ -127,9 +139,11 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin<
 
 class ApisService {
   Future<UserModel?> getUser() async {
-    var response = await HttpUtils.postRequest(url: ApiConstants.USER_PROFILE, queryParameters: {
-      "StudentId": 22509,
-    });
+    var response = await HttpUtils.postRequest(
+        url: ApiConstants.USER_PROFILE,
+        queryParameters: {
+          "StudentId": 22509,
+        });
 
     if (response == null || response.data == null) {
       return null;
