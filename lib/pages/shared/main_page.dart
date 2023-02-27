@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:portfilioapp/pages/Home/attendance.dart';
 import 'package:portfilioapp/pages/Home/home.dart';
 import 'package:portfilioapp/pages/Home/login.dart';
 import 'package:portfilioapp/pages/Home/user.dart';
@@ -19,7 +18,8 @@ class _MainPageState extends State<MainPage> {
   final PageController _pageController = PageController();
 
   void onTap(int index) {
-    _pageController.animateToPage(index, duration: const Duration(milliseconds: 300), curve: Curves.bounceInOut);
+    _pageController.animateToPage(index,
+        duration: const Duration(milliseconds: 300), curve: Curves.bounceInOut);
   }
 
   @override
@@ -45,9 +45,9 @@ class _MainPageState extends State<MainPage> {
         child: Column(
           children: [
             //       // ignore: sort_child_properties_last
-            Container(
+            const SizedBox(
               width: double.infinity,
-              child: const DrawerHeader(
+              child: DrawerHeader(
                 // ignore: deprecated_member_use
                 //  decoration: BoxDecoration(color: _theme.accentColor),
                 child: Text(
@@ -81,17 +81,17 @@ class _MainPageState extends State<MainPage> {
                 ),
               );
             }),
-            Container(
+            SizedBox(
               width: double.infinity,
               child: Align(
                 alignment: FractionalOffset.bottomCenter,
                 child: Column(
                   children: [
-                    Divider(
+                    const Divider(
                         //  color: Colors.cyanAccent,
                         ),
                     ListTile(
-                      contentPadding: EdgeInsetsDirectional.only(
+                      contentPadding: const EdgeInsetsDirectional.only(
                         start: 10.0,
                         bottom: 20.0,
                       ),
@@ -117,13 +117,13 @@ class _MainPageState extends State<MainPage> {
         ),
       ),
       body: PageView(
-        onPageChanged: (index){
+        onPageChanged: (index) {
           setState(() {
             currentindex = index;
           });
         },
         controller: _pageController,
-        children: const [LoginPage(), HomePage(), UserPage(), AttendancePage()],
+        children: const [LoginPage(), HomePage(), UserPage()],
       ),
       bottomNavigationBar: BottomNavigationBar(
           unselectedFontSize: 13,
@@ -133,16 +133,22 @@ class _MainPageState extends State<MainPage> {
           // backgroundColor: Colors.teal,
           onTap: onTap,
           currentIndex: currentindex,
-          selectedItemColor: Colors.amber,
-          unselectedItemColor: Colors.amber.withOpacity(0.5),
+          selectedItemColor: Colors.indigo,
+          unselectedItemColor: Colors.indigo.withOpacity(0.5),
           showUnselectedLabels: true,
           showSelectedLabels: true,
           elevation: 0,
           items: const [
-            BottomNavigationBarItem(tooltip: "Menu", label: "Menu", icon: Icon(Icons.menu)),
-            BottomNavigationBarItem(tooltip: "Home", label: "Home", icon: Icon(Icons.apps)),
-            BottomNavigationBarItem(tooltip: "Home", label: "Bar", icon: Icon(Icons.bar_chart_sharp)),
-            BottomNavigationBarItem(tooltip: "User", label: "User", icon: Icon(Icons.person))
+            BottomNavigationBarItem(
+                tooltip: "Menu", label: "Menu", icon: Icon(Icons.menu)),
+            BottomNavigationBarItem(
+                tooltip: "Home", label: "Home", icon: Icon(Icons.apps)),
+            BottomNavigationBarItem(
+                tooltip: "Home",
+                label: "Bar",
+                icon: Icon(Icons.bar_chart_sharp)),
+            BottomNavigationBarItem(
+                tooltip: "User", label: "User", icon: Icon(Icons.person))
           ]),
     );
   }
