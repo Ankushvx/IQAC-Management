@@ -8,17 +8,12 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     // ignore: sized_box_for_whitespace
     return const DefaultTabController(
-      length: 0,
+      length: 5,
       //initialIndex: tabIndex,
       child: Scaffold(
         bottomNavigationBar: TabBar(
           labelColor: Colors.black38,
           tabs: [
-            // Tab(icon: Icon(Icons.menu)),
-            //Tab(icon: Icon(Icons.home)),
-            //Tab(icon: Icon(Icons.home)),
-            //Tab(icon: Icon(Icons.home)),
-            // Tab(icon: Icon(Icons.music_note_outlined)),
             Padding(
               padding: EdgeInsets.only(top: 12, bottom: 20),
               child: IconButton(
@@ -30,16 +25,6 @@ class LoginPage extends StatelessWidget {
                     semanticLabel: "User",
                   ),
                   tooltip: "User"),
-
-              //  Tab(
-              //   icon: Icon(
-              //     Icons.attndace,
-              //     opticalSize: 80,
-              //   ),
-              //   text: "user",
-              // ),
-
-              //Text('green')),
             ),
             Padding(
                 padding: EdgeInsets.only(top: 15, bottom: 20),

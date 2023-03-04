@@ -3,6 +3,7 @@ import 'package:portfilioapp/pages/Home/attendance.dart';
 import 'package:portfilioapp/pages/Home/home.dart';
 import 'package:portfilioapp/pages/Home/login.dart';
 import 'package:portfilioapp/pages/Home/user.dart';
+import '../../models/usermodel.dart';
 import 'themes.dart';
 
 class MainPage extends StatefulWidget {
@@ -37,11 +38,11 @@ class _MainPageState extends State<MainPage> {
             onPressed: () {
               currentTheme.toggleTheme();
             },
-            icon: Icon(Icons.brightness_2_outlined),
+            icon: const Icon(Icons.brightness_2_outlined),
           ),
         ],
       ),
-      drawer: DrawerPage(),
+      drawer: const DrawerPage(),
       body: PageView(
         onPageChanged: (index) {
           setState(() {
@@ -82,7 +83,6 @@ class _MainPageState extends State<MainPage> {
 
 class DrawerPage extends StatefulWidget {
   const DrawerPage({super.key});
-
   @override
   State<DrawerPage> createState() => _DrawerPageState();
 }
@@ -92,41 +92,117 @@ class _DrawerPageState extends State<DrawerPage> {
   Widget build(BuildContext context) {
     return Drawer(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          DrawerHeader(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: NetworkImage(
+                    'https://images.unsplash.com/photo-1668587778654-e0babf8483b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80'),
+                fit: BoxFit.fill,
+              ),
+            ),
+            padding: const EdgeInsets.all(0),
+            child: Column(
+              // ignore: prefer_const_literals_to_create_immutables
+              children: [
+                const SizedBox(
+                  height: 20,
+                ),
+                const CircleAvatar(
+                  backgroundColor: Colors.white70,
+                  minRadius: 38,
+                  child: CircleAvatar(
+                    radius: 35,
+                    backgroundImage: NetworkImage(
+                        "https://images.unsplash.com/photo-1573918651711-3b555ceac468?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2073&q=80"),
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                const Text(
+                  "Ankush Verma",
+                  style: TextStyle(
+                    fontFamily: 'Raleway',
+                    fontSize: 20,
+                    color: Colors.black87,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                const Text(
+                  "ankushkv2000@gmail.com",
+                  style: TextStyle(
+                    fontFamily: 'Raleway',
+                    fontSize: 15,
+                    color: Colors.black87,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ],
+            ),
+          ),
+
           //       // ignore: sort_child_properties_last
           const SizedBox(
             width: double.infinity,
-            child: DrawerHeader(
-              // ignore: deprecated_member_use
-              //  decoration: BoxDecoration(color: _theme.accentColor),
-              child: Text(
-                'Side Menu',
-                style: TextStyle(
-                    fontFamily: 'Loto',
-                    //  color: Colors.white,
-                    fontSize: 25,
-                    overflow: TextOverflow.fade),
+            child: UserAccountsDrawerHeader(
+              currentAccountPicture: CircleAvatar(
+                backgroundColor: Colors.white70,
+                child: CircleAvatar(
+                  radius: 32.0,
+                  backgroundImage: NetworkImage(
+                      "https://images.unsplash.com/photo-1573918651711-3b555ceac468?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2073&q=80"),
+                ),
+              ),
+              accountName: Text(
+                "Ankush Verma",
+                style: TextStyle(fontFamily: 'Raleway'),
+              ),
+              accountEmail: Text(
+                "ankushkv2000@gmail.com",
+                style: TextStyle(fontFamily: 'Raleway'),
               ),
             ),
+            // ignore: deprecated_member_use
+            //  decoration: BoxDecoration(color: _theme.accentColor),
+            // child: Text(
+            //     'Side Menu',
+            //     style: TextStyle(
+            //         fontFamily: 'Loto',
+            //         //  color: Colors.white,
+            //         fontSize: 25,
+            //         overflow: TextOverflow.fade),
+            //   ),
           ),
           Builder(builder: (context) {
             return Expanded(
-              child: ListTile(
-                leading: const Icon(
-                  Icons.input,
-                  // color: Colors.cyan,
-                ),
-                title: const Text("Welcome",
-                    selectionColor: Colors.cyan,
-                    style: TextStyle(
-                      fontFamily: 'Raleway',
-                      fontSize: 20,
-                      //color: Colors.cyan
-                    )),
-                //  tileColor: Colors.cyan,
-                onTap: () {
-                  //Navigator.pop(context);
-                },
+              child: ListView(
+                padding: EdgeInsets.zero,
+                children: [
+                  ListTile(
+                    onTap: () {
+                      setState(() {
+                        Navigator.pop(context);
+                      });
+                    },
+                    leading: const Icon(
+                      Icons.input,
+                      // color: Colors.cyan,
+                    ),
+                    title: const Text("Welcome",
+                        selectionColor: Colors.cyan,
+                        style: TextStyle(
+                          fontFamily: 'Raleway',
+                          fontSize: 20,
+                          //color: Colors.cyan
+                        )),
+                    //  tileColor: Colors.cyan,
+                  ),
+                ],
               ),
             );
           }),
