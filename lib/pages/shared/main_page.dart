@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:portfilioapp/pages/Home/attendance.dart';
 import 'package:portfilioapp/pages/Home/home.dart';
 import 'package:portfilioapp/pages/Home/login.dart';
 import 'package:portfilioapp/pages/Home/user.dart';
@@ -24,10 +25,8 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    /// const color = Colors.black;
     final _theme = Theme.of(context);
     return Scaffold(
-      //backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(
           widget.title,
@@ -35,87 +34,14 @@ class _MainPageState extends State<MainPage> {
         ),
         actions: [
           IconButton(
-              onPressed: () {
-                currentTheme.toggleTheme();
-              },
-              icon: Icon(Icons.brightness_2_outlined))
+            onPressed: () {
+              currentTheme.toggleTheme();
+            },
+            icon: Icon(Icons.brightness_2_outlined),
+          ),
         ],
       ),
-      drawer: Drawer(
-        child: Column(
-          children: [
-            //       // ignore: sort_child_properties_last
-            const SizedBox(
-              width: double.infinity,
-              child: DrawerHeader(
-                // ignore: deprecated_member_use
-                //  decoration: BoxDecoration(color: _theme.accentColor),
-                child: Text(
-                  'Side Menu',
-                  style: TextStyle(
-                      fontFamily: 'Loto',
-                      //  color: Colors.white,
-                      fontSize: 25,
-                      overflow: TextOverflow.fade),
-                ),
-              ),
-            ),
-            Builder(builder: (context) {
-              return Expanded(
-                child: ListTile(
-                  leading: const Icon(
-                    Icons.input,
-                    // color: Colors.cyan,
-                  ),
-                  title: const Text("Welcome",
-                      selectionColor: Colors.cyan,
-                      style: TextStyle(
-                        fontFamily: 'Raleway',
-                        fontSize: 20,
-                        //color: Colors.cyan
-                      )),
-                  //  tileColor: Colors.cyan,
-                  onTap: () {
-                    //Navigator.pop(context);
-                  },
-                ),
-              );
-            }),
-            SizedBox(
-              width: double.infinity,
-              child: Align(
-                alignment: FractionalOffset.bottomCenter,
-                child: Column(
-                  children: [
-                    const Divider(
-                        //  color: Colors.cyanAccent,
-                        ),
-                    ListTile(
-                      contentPadding: const EdgeInsetsDirectional.only(
-                        start: 10.0,
-                        bottom: 20.0,
-                      ),
-                      title: const Text("Logout",
-                          style: TextStyle(
-                            fontSize: 20,
-                            //color: Colors.cyan
-                          )),
-                      leading: const Icon(
-                        Icons.exit_to_app,
-                        //  color: Colors.cyan,
-                      ),
-                      //  tileColor: Colors.cyan,
-                      onTap: () {
-                        //Navigator.pop(context);
-                      },
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
+      drawer: DrawerPage(),
       body: PageView(
         onPageChanged: (index) {
           setState(() {
@@ -123,7 +49,7 @@ class _MainPageState extends State<MainPage> {
           });
         },
         controller: _pageController,
-        children: const [LoginPage(), HomePage(), UserPage()],
+        children: const [LoginPage(), HomePage(), AttendancePage(), UserPage()],
       ),
       bottomNavigationBar: BottomNavigationBar(
           unselectedFontSize: 13,
@@ -133,8 +59,8 @@ class _MainPageState extends State<MainPage> {
           // backgroundColor: Colors.teal,
           onTap: onTap,
           currentIndex: currentindex,
-          selectedItemColor: Colors.indigo,
-          unselectedItemColor: Colors.indigo.withOpacity(0.5),
+          // selectedItemColor: Colors.indigo,
+          // unselectedItemColor: Colors.indigo.withOpacity(0.5),
           showUnselectedLabels: true,
           showSelectedLabels: true,
           elevation: 0,
@@ -150,6 +76,98 @@ class _MainPageState extends State<MainPage> {
             BottomNavigationBarItem(
                 tooltip: "User", label: "User", icon: Icon(Icons.person))
           ]),
+    );
+  }
+}
+
+class DrawerPage extends StatefulWidget {
+  const DrawerPage({super.key});
+
+  @override
+  State<DrawerPage> createState() => _DrawerPageState();
+}
+
+class _DrawerPageState extends State<DrawerPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: Column(
+        children: [
+          //       // ignore: sort_child_properties_last
+          const SizedBox(
+            width: double.infinity,
+            child: DrawerHeader(
+              // ignore: deprecated_member_use
+              //  decoration: BoxDecoration(color: _theme.accentColor),
+              child: Text(
+                'Side Menu',
+                style: TextStyle(
+                    fontFamily: 'Loto',
+                    //  color: Colors.white,
+                    fontSize: 25,
+                    overflow: TextOverflow.fade),
+              ),
+            ),
+          ),
+          Builder(builder: (context) {
+            return Expanded(
+              child: ListTile(
+                leading: const Icon(
+                  Icons.input,
+                  // color: Colors.cyan,
+                ),
+                title: const Text("Welcome",
+                    selectionColor: Colors.cyan,
+                    style: TextStyle(
+                      fontFamily: 'Raleway',
+                      fontSize: 20,
+                      //color: Colors.cyan
+                    )),
+                //  tileColor: Colors.cyan,
+                onTap: () {
+                  //Navigator.pop(context);
+                },
+              ),
+            );
+          }),
+          SizedBox(
+            width: double.infinity,
+            child: Align(
+              alignment: FractionalOffset.bottomCenter,
+              child: Column(
+                children: [
+                  const Divider(
+                      //  color: Colors.cyanAccent,
+                      ),
+                  ListTile(
+                    contentPadding: const EdgeInsetsDirectional.only(
+                      start: 10.0,
+                      bottom: 20.0,
+                    ),
+                    title: const Text("Logout",
+                        style: TextStyle(
+                          fontSize: 20,
+                          //color: Colors.cyan
+                        )),
+                    leading: const Icon(
+                      Icons.exit_to_app,
+                      //  color: Colors.cyan,
+                    ),
+                    //  tileColor: Colors.cyan,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const LoginPage()),
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

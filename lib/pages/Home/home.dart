@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:portfilioapp/constants/apiconstants.dart';
-import 'package:portfilioapp/models/eventmodel.dart';
 import 'package:portfilioapp/models/usermodel.dart';
 import 'package:portfilioapp/utils/http_utils.dart';
 
