@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:portfilioapp/pages/shared/main_page.dart';
+import 'package:portfilioapp/pages/login_page/login_page.dart';
 import 'package:portfilioapp/pages/shared/themes.dart';
 
 void main() {
@@ -30,11 +30,10 @@ class _MyAppState extends State<MyApp> {
       // theme: ThemeData(
       //   primarySwatch: Colors.cyan,
       // ),
-
       themeMode: currentTheme.currentTheme,
       theme: CustomTheme.lightTheme,
       darkTheme: CustomTheme.darkTheme,
-      home: const MainPage(),
+      home: const LoginPage(),
     );
   }
 }

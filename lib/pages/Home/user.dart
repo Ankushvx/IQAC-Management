@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../constants/apiconstants.dart';
 import '../../models/usermodel.dart';
 import '../../utils/http_utils.dart';
@@ -88,6 +87,8 @@ class _UserPageState extends State<UserPage>
 
   @override
   Widget build(BuildContext context) {
+    final _theme = Theme.of(context);
+
     super.build(context);
     if (_isLoading) {
       return const Center(
@@ -104,7 +105,8 @@ class _UserPageState extends State<UserPage>
     }
 
     final userModel = _userModel!;
-
+    // final imageu = Image.network(
+    //     'https://erp.subharti.org/${userModel.photo.replaceAll('~/', '')}');
     return Scaffold(
       //     body: SingleChildScrollView(
       //       physics: const BouncingScrollPhysics(),
@@ -136,7 +138,7 @@ class _UserPageState extends State<UserPage>
             width: double.infinity,
             decoration: const BoxDecoration(
               gradient: LinearGradient(
-                colors: [Colors.indigo, Color.fromARGB(255, 69, 89, 204)],
+                colors: [Color(0xFF26A69A), Color(0xFF4DB6AC)],
                 begin: Alignment.centerLeft,
                 end: Alignment.centerRight,
                 stops: [0.4, 0.8],
@@ -150,15 +152,29 @@ class _UserPageState extends State<UserPage>
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   // ignore: prefer_const_literals_to_create_immutables
                   children: [
-                    const CircleAvatar(
+                    CircleAvatar(
                       backgroundColor: Colors.white70,
                       minRadius: 60.0,
                       child: CircleAvatar(
-                        radius: 50.0,
-                        backgroundImage: NetworkImage(
-                            'https://avatars0.githubusercontent.com/u/28812093?s=460&u=06471c90e03cfd8ce2855d217d157c93060da490&v=4'),
+                        radius: 52.0,
+                        child: ClipOval(
+                          child: Image.network(
+                              fit: BoxFit.scaleDown,
+                              ApiConstants.IMAGEHOST +
+                                  userModel.photo.replaceAll('~/', '')),
+                        ),
                       ),
-                    ),
+                    )
+                    // const CircleAvatar(
+                    //   backgroundColor: Colors.white70,
+                    //   minRadius: 60.0,
+                    //   child: CircleAvatar(
+                    //       radius: 50.0,
+                    //       backgroundImage: NetworkImage(
+                    //         'https://images.unsplash.com/${userModel.studentName}',
+                    //       ) //NetworkImage('${userModel.studentName}'),
+                    //       ),
+                    // ),
                   ],
                 ),
                 const SizedBox(
@@ -237,6 +253,27 @@ class _UserPageState extends State<UserPage>
                 ),
                 subtitle: Text(
                   userModel.dateOfBirth,
+                  // DateTime.parse(userModel.dateOfBirth).toString("dd-MM-yyyy"),
+                  style: const TextStyle(fontSize: 18),
+                ),
+              ),
+            ],
+          ),
+          const Divider(),
+          Column(
+            children: [
+              ListTile(
+                // padding: const EdgeInsets.all(8.0),
+                title: const Text(
+                  "Address",
+                  style: TextStyle(
+                      // color: Colors.indigoAccent,
+                      //  fontWeight: FontWeight.normal,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20),
+                ),
+                subtitle: Text(
+                  userModel.permAddress,
                   style: const TextStyle(fontSize: 18),
                 ),
               ),
