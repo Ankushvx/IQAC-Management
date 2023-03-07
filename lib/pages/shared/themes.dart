@@ -27,7 +27,7 @@ class CustomTheme with ChangeNotifier {
           padding: const EdgeInsets.symmetric(vertical: 14),
           shape: const StadiumBorder(),
           // ignore: deprecated_member_use
-          primary: Colors.black54,
+          primary: Colors.teal[600],
           elevation: 8,
           shadowColor: Colors.black87,
         ),
@@ -88,7 +88,7 @@ class CustomTheme with ChangeNotifier {
 class CompanyColors {
   CompanyColors._(); // this basically makes it so you can instantiate this class
 
-  static const _blackPrimaryValue = 0xFF009688;
+  static const _blackPrimaryValue = 0xFF64FFDA;
 
   static const MaterialColor teal = const MaterialColor(
     _blackPrimaryValue,
