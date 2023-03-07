@@ -49,6 +49,34 @@ class _LoginContentState extends State<LoginContent>
     );
   }
 
+  Widget inputPasswordField(String hint, IconData iconData) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 36, vertical: 8),
+      child: SizedBox(
+        height: 50,
+        child: Material(
+          elevation: 8,
+          shadowColor: Colors.black87,
+          color: Colors.transparent,
+          borderRadius: BorderRadius.circular(30),
+          child: TextField(
+            textAlignVertical: TextAlignVertical.bottom,
+            decoration: InputDecoration(
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(30),
+                borderSide: BorderSide.none,
+              ),
+              // filled: true,
+              // fillColor: Theme.of(context).focusColor, // Colors.white,
+              hintText: hint,
+              prefixIcon: Icon(iconData),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget loginButton(String title) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 135, vertical: 16),
@@ -166,7 +194,7 @@ class _LoginContentState extends State<LoginContent>
   void initState() {
     createAccountContent = [
       inputField('Email', Icons.mail_outline),
-      inputField('Password', Icons.lock_outlined),
+      inputPasswordField('Password', Icons.lock_outlined),
       loginButton('Sign In'),
       forgotPassword(),
     ];
@@ -174,7 +202,7 @@ class _LoginContentState extends State<LoginContent>
     loginContent = [
       inputField('Name', Icons.person_outline),
       inputField('Email', Icons.mail_outline),
-      inputField('Password', Icons.lock_outlined),
+      inputPasswordField('Password', Icons.lock_outlined),
       signupButton('Sign Up'),
       orDivider(),
       logos(),

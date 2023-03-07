@@ -32,6 +32,7 @@ class CustomTheme with ChangeNotifier {
           shadowColor: Colors.black87,
         ),
       ),
+      textTheme: TextTheme(bodyText1: TextStyle(color: Colors.black26)),
       buttonTheme: const ButtonThemeData(
         buttonColor: kSacondaryColer,
       ),
