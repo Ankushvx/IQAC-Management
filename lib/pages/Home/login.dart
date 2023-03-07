@@ -8,7 +8,7 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     // ignore: sized_box_for_whitespace
     return const DefaultTabController(
-      length: 0,
+      length: 5,
       //initialIndex: tabIndex,
       child: Scaffold(
         bottomNavigationBar: TabBar(

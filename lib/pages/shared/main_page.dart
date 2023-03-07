@@ -92,21 +92,55 @@ class _DrawerPageState extends State<DrawerPage> {
   Widget build(BuildContext context) {
     return Drawer(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          //       // ignore: sort_child_properties_last
-          const SizedBox(
-            width: double.infinity,
-            child: DrawerHeader(
-              // ignore: deprecated_member_use
-              //  decoration: BoxDecoration(color: _theme.accentColor),
-              child: Text(
-                'Side Menu',
-                style: TextStyle(
-                    fontFamily: 'Loto',
-                    //  color: Colors.white,
-                    fontSize: 25,
-                    overflow: TextOverflow.fade),
+          DrawerHeader(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                fit: BoxFit.fill,
+                image: NetworkImage(
+                  "https://images.unsplash.com/photo-1615716175455-9a098e2388be?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2487&q=80",
+                ),
               ),
+            ),
+            padding: const EdgeInsets.all(0),
+            child: Column(
+              children: const [
+                SizedBox(
+                  height: 10,
+                ),
+                CircleAvatar(
+                  backgroundColor: Colors.white70,
+                  minRadius: 42,
+                  child: CircleAvatar(
+                    radius: 35,
+                    backgroundImage: NetworkImage(
+                        'https://images.unsplash.com/photo-1559152840-089d9d5facbe?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80'),
+                  ),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Text(
+                  'Ankush Verma ',
+                  style: TextStyle(
+                      fontFamily: 'Loto',
+                      //  color: Colors.white,
+                      fontSize: 18,
+                      overflow: TextOverflow.fade),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Text(
+                  'ankushkv2000@gmail.com',
+                  style: TextStyle(
+                      fontFamily: 'Loto',
+                      //  color: Colors.white,
+                      fontSize: 15,
+                      overflow: TextOverflow.fade),
+                ),
+              ],
             ),
           ),
           Builder(builder: (context) {
@@ -125,7 +159,7 @@ class _DrawerPageState extends State<DrawerPage> {
                     )),
                 //  tileColor: Colors.cyan,
                 onTap: () {
-                  //Navigator.pop(context);
+                  Navigator.pop(context);
                 },
               ),
             );
