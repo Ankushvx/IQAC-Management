@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:portfilioapp/pages/Home/attendance.dart';
 import 'package:portfilioapp/pages/Home/home.dart';
 import 'package:portfilioapp/pages/Home/login.dart';
-import 'package:portfilioapp/pages/Home/user.dart'; 
+import 'package:portfilioapp/pages/Home/user.dart';
 import '../../constants/apiconstants.dart';
 import '../../models/usermodel.dart';
-import '../../utils/http_utils.dart'; 
+import '../../utils/http_utils.dart';
 import 'themes.dart';
 
 class MainPage extends StatefulWidget {
@@ -40,10 +40,13 @@ class _MainPageState extends State<MainPage> {
             onPressed: () {
               currentTheme.toggleTheme();
             },
-            icon: const Icon(Icons.brightness_2_outlined),
+            icon: Icon(Icons.brightness_2_outlined),
           ),
         ],
-      ), 
+      ),
+      // drawer: const Drawer(
+      //   child: DrawerPage(),
+      // ),
       drawer: const DrawerPage(),
       body: PageView(
         onPageChanged: (index) {
@@ -85,6 +88,7 @@ class _MainPageState extends State<MainPage> {
 
 class DrawerPage extends StatefulWidget {
   const DrawerPage({super.key});
+
   @override
   State<DrawerPage> createState() => _DrawerPageState();
 }
@@ -143,20 +147,21 @@ class _DrawerPageState extends State<DrawerPage> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           DrawerHeader(
-            decoration: const BoxDecoration( 
-              // image: DecorationImage(
-              //  fit: BoxFit.fill,
-              //  image: AssetImage('assets/images/drawerbg.avif')
-              // NetworkImage(
-              //   "https://images.unsplash.com/photo-1615716175455-9a098e2388be?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2487&q=80",
-              // ),
-              //    ),
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                  fit: BoxFit.fill,
+                  image: AssetImage('assets/images/drawerbg.avif')
+                  // NetworkImage(
+                  //   "https://images.unsplash.com/photo-1615716175455-9a098e2388be?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2487&q=80",
+                  // ),
+                  ),
               gradient: LinearGradient(
                 colors: [Color(0xFF26A69A), Color(0xFF4DB6AC)],
                 begin: Alignment.centerLeft,
                 end: Alignment.centerRight,
-                stops: [0.4, 0.8],  
-            ), 
+                stops: [0.4, 0.8],
+              ),
+            ),
             padding: const EdgeInsets.all(0),
             child: Column(
               children: <Widget>[
@@ -217,7 +222,6 @@ class _DrawerPageState extends State<DrawerPage> {
                 onTap: () {
                   Navigator.pop(context);
                 },
- 
               ),
             );
           }),
