@@ -87,7 +87,7 @@ class CustomTheme with ChangeNotifier {
 class CompanyColors {
   CompanyColors._(); // this basically makes it so you can instantiate this class
 
-  static const _blackPrimaryValue = 0xFF64FFDA;
+  static const _blackPrimaryValue = 0xFF009688;
 
   static const MaterialColor teal = const MaterialColor(
     _blackPrimaryValue,

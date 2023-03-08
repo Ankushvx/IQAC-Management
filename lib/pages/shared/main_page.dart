@@ -3,6 +3,9 @@ import 'package:portfilioapp/pages/Home/attendance.dart';
 import 'package:portfilioapp/pages/Home/home.dart';
 import 'package:portfilioapp/pages/Home/login.dart';
 import 'package:portfilioapp/pages/Home/user.dart';
+import '../../constants/apiconstants.dart';
+import '../../models/usermodel.dart';
+import '../../utils/http_utils.dart';
 import 'themes.dart';
 
 class MainPage extends StatefulWidget {
@@ -41,7 +44,10 @@ class _MainPageState extends State<MainPage> {
           ),
         ],
       ),
-      drawer: DrawerPage(),
+      // drawer: const Drawer(
+      //   child: DrawerPage(),
+      // ),
+      drawer: const DrawerPage(),
       body: PageView(
         onPageChanged: (index) {
           setState(() {
@@ -49,7 +55,7 @@ class _MainPageState extends State<MainPage> {
           });
         },
         controller: _pageController,
-        children: const [LoginPage(), HomePage(), AttendancePage(), UserPage()],
+        children: const [HomePage(), AttendancePage(), UserPage()],
       ),
       bottomNavigationBar: BottomNavigationBar(
           unselectedFontSize: 13,
@@ -65,10 +71,10 @@ class _MainPageState extends State<MainPage> {
           showSelectedLabels: true,
           elevation: 0,
           items: const [
+            // BottomNavigationBarItem(
+            //     tooltip: "Menu", label: "Menu", icon: Icon(Icons.menu)),
             BottomNavigationBarItem(
-                tooltip: "Menu", label: "Menu", icon: Icon(Icons.menu)),
-            BottomNavigationBarItem(
-                tooltip: "Home", label: "Home", icon: Icon(Icons.apps)),
+                tooltip: "Home", label: "Home", icon: Icon(Icons.home)),
             BottomNavigationBarItem(
                 tooltip: "Home",
                 label: "Bar",
@@ -88,25 +94,78 @@ class DrawerPage extends StatefulWidget {
 }
 
 class _DrawerPageState extends State<DrawerPage> {
+  UserModel? _userModel;
+  bool _isLoading = false;
+
+  @override
+  bool get wantKeepAlive => true;
+
+  @override
+  void initState() {
+    super.initState();
+    _getData();
+  }
+
+  void _getData() {
+    setState(() {
+      _isLoading = true;
+    });
+
+    ApisService().getUser().then((value) {
+      setState(() {
+        _userModel = value;
+      });
+    }).whenComplete(() {
+      setState(() {
+        _isLoading = false;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    final _theme = Theme.of(context);
+
+    // super.build(context);
+    if (_isLoading) {
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
+    }
+
+    if (_userModel == null) {
+      return const Center(
+        child: Text(
+          "Failed to load student details.",
+        ),
+      );
+    }
+
+    final userModel = _userModel!;
     return Drawer(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           DrawerHeader(
             decoration: const BoxDecoration(
-              image: DecorationImage(
-                fit: BoxFit.fill,
-                image: NetworkImage(
-                  "https://images.unsplash.com/photo-1615716175455-9a098e2388be?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2487&q=80",
-                ),
+              // image: DecorationImage(
+              //  fit: BoxFit.fill,
+              //  image: AssetImage('assets/images/drawerbg.avif')
+              // NetworkImage(
+              //   "https://images.unsplash.com/photo-1615716175455-9a098e2388be?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2487&q=80",
+              // ),
+              //    ),
+              gradient: LinearGradient(
+                colors: [Color(0xFF26A69A), Color(0xFF4DB6AC)],
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+                stops: [0.4, 0.8],
               ),
             ),
             padding: const EdgeInsets.all(0),
             child: Column(
-              children: const [
-                SizedBox(
+              children: <Widget>[
+                const SizedBox(
                   height: 10,
                 ),
                 CircleAvatar(
@@ -115,26 +174,28 @@ class _DrawerPageState extends State<DrawerPage> {
                   child: CircleAvatar(
                     radius: 35,
                     backgroundImage: NetworkImage(
-                        'https://images.unsplash.com/photo-1559152840-089d9d5facbe?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80'),
+                      ApiConstants.IMAGEHOST +
+                          userModel.photo.replaceAll('~/', ''),
+                    ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 5,
                 ),
                 Text(
-                  'Ankush Verma ',
-                  style: TextStyle(
-                      fontFamily: 'Loto',
+                  userModel.studentName,
+                  style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
                       //  color: Colors.white,
-                      fontSize: 18,
                       overflow: TextOverflow.fade),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 5,
                 ),
                 Text(
-                  'ankushkv2000@gmail.com',
-                  style: TextStyle(
+                  userModel.contactNo,
+                  style: const TextStyle(
                       fontFamily: 'Loto',
                       //  color: Colors.white,
                       fontSize: 15,
@@ -203,5 +264,21 @@ class _DrawerPageState extends State<DrawerPage> {
         ],
       ),
     );
+  }
+}
+
+class ApisService {
+  Future<UserModel?> getUser() async {
+    var response = await HttpUtils.postRequest(
+        url: ApiConstants.USER_PROFILE,
+        queryParameters: {
+          "StudentId": 22509,
+        });
+
+    if (response == null || response.data == null) {
+      return null;
+    }
+
+    return UserModel.fromJson(response.data);
   }
 }

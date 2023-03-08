@@ -137,6 +137,10 @@ class _UserPageState extends State<UserPage>
             height: 250,
             width: double.infinity,
             decoration: const BoxDecoration(
+              // image: DecorationImage(
+              //   fit: BoxFit.fill,
+              //   image: AssetImage('assets/images/drawerbg.avif'),
+              // ),
               gradient: LinearGradient(
                 colors: [Color(0xFF26A69A), Color(0xFF4DB6AC)],
                 begin: Alignment.centerLeft,
@@ -183,16 +187,16 @@ class _UserPageState extends State<UserPage>
                 Text(
                   userModel.studentName,
                   style: const TextStyle(
-                    fontSize: 30,
+                    fontSize: 25,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    // color: Colors.white,
                   ),
                 ),
                 Text(
                   userModel.courseName,
                   style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 25,
+                    //  color: Colors.white,
+                    fontSize: 20,
                   ),
                 ),
               ],
@@ -254,6 +258,26 @@ class _UserPageState extends State<UserPage>
                 subtitle: Text(
                   userModel.dateOfBirth,
                   // DateTime.parse(userModel.dateOfBirth).toString("dd-MM-yyyy"),
+                  style: const TextStyle(fontSize: 18),
+                ),
+              ),
+            ],
+          ),
+          const Divider(),
+          Column(
+            children: [
+              ListTile(
+                // padding: const EdgeInsets.all(8.0),
+                title: const Text(
+                  "Mobile No.",
+                  style: TextStyle(
+                      // color: Colors.indigoAccent,
+                      //  fontWeight: FontWeight.normal,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20),
+                ),
+                subtitle: Text(
+                  userModel.contactNo,
                   style: const TextStyle(fontSize: 18),
                 ),
               ),
