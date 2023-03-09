@@ -14,18 +14,20 @@ class _LoginPageState extends State<LoginPage> {
   Widget topWidget(double screenWidget) {
     return Transform.rotate(
       angle: -35 * math.pi / 180,
-      child: Container(
-        width: 1.2 * screenWidget,
-        height: 1.2 * screenWidget,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(150),
-          gradient: const LinearGradient(
-            begin: Alignment(-0.2, -0.8),
-            end: Alignment.bottomCenter,
-            colors: [
-              Color(0x007CBFCF),
-              Color(0xB316BFC4),
-            ],
+      child: SingleChildScrollView(
+        child: Container(
+          width: 1.2 * screenWidget,
+          height: 1.2 * screenWidget,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(150),
+            gradient: const LinearGradient(
+              begin: Alignment(-0.2, -0.8),
+              end: Alignment.bottomCenter,
+              colors: [
+                Color(0x007CBFCF),
+                Color(0xB316BFC4),
+              ],
+            ),
           ),
         ),
       ),
