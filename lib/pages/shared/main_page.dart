@@ -148,13 +148,13 @@ class _DrawerPageState extends State<DrawerPage> {
         children: [
           DrawerHeader(
             decoration: const BoxDecoration(
-              image: DecorationImage(
-                  fit: BoxFit.fill,
-                  image: AssetImage('assets/images/drawerbg.avif')
-                  // NetworkImage(
-                  //   "https://images.unsplash.com/photo-1615716175455-9a098e2388be?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2487&q=80",
-                  // ),
-                  ),
+              // image: DecorationImage(
+              //     fit: BoxFit.fill,
+              //     image: AssetImage('assets/images/drawerbg.avif')
+              //     // NetworkImage(
+              //     //   "https://images.unsplash.com/photo-1615716175455-9a098e2388be?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2487&q=80",
+              //     // ),
+              //     ),
               gradient: LinearGradient(
                 colors: [Color(0xFF26A69A), Color(0xFF4DB6AC)],
                 begin: Alignment.centerLeft,
@@ -196,10 +196,11 @@ class _DrawerPageState extends State<DrawerPage> {
                 Text(
                   userModel.contactNo,
                   style: const TextStyle(
-                      fontFamily: 'Loto',
-                      //  color: Colors.white,
-                      fontSize: 15,
-                      overflow: TextOverflow.fade),
+                    //  fontFamily: 'Loto',
+                    fontWeight: FontWeight.bold,
+                    //  color: Colors.white,
+                    fontSize: 15,
+                  ),
                 ),
               ],
             ),
