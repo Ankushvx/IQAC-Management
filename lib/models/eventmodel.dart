@@ -6,7 +6,7 @@ class EventModel {
     required this.eventName,
     required this.filePath,
   });
-  factory EventModel.fromJson(Map<String, dynamic> json) => EventModel(
+  factory EventModel.fromJson(json) => EventModel(
         eventName: json['eventName'],
         filePath: json['filePath'],
       );

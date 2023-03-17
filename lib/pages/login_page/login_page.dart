@@ -14,22 +14,23 @@ class _LoginPageState extends State<LoginPage> {
   Widget topWidget(double screenWidget) {
     return Transform.rotate(
       angle: -35 * math.pi / 180,
-      child: SingleChildScrollView(
-        child: Container(
-          width: 1.2 * screenWidget,
-          height: 1.2 * screenWidget,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(150),
-            gradient: const LinearGradient(
-              begin: Alignment(-0.2, -0.8),
-              end: Alignment.bottomCenter,
-              colors: [
-                Color(0x007CBFCF),
-                Color(0xB316BFC4),
-              ],
-            ),
+      //  child: SingleChildScrollView(
+      //  physics: BouncingScrollPhysics(),
+      child: Container(
+        width: 1.2 * screenWidget,
+        height: 1.2 * screenWidget,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(150),
+          gradient: const LinearGradient(
+            begin: Alignment(-0.2, -0.8),
+            end: Alignment.bottomCenter,
+            colors: [
+              Color(0x007CBFCF),
+              Color(0xB316BFC4),
+            ],
           ),
         ),
+        //  ),
       ),
     );
   }
@@ -52,22 +53,22 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
-
+    final screenSize = MediaQuery.of(context).size.width;
+    final screenSizes = MediaQuery.of(context).size;
     return Scaffold(
       body: Stack(
         children: [
           Positioned(
             top: -160,
             left: -30,
-            child: topWidget(screenSize.width),
+            child: topWidget(screenSize),
           ),
           Positioned(
-            bottom: -180,
+            bottom: -160,
             left: -40,
-            child: bottomWidget(screenSize.width),
+            child: bottomWidget(screenSize),
           ),
-          CenterWidget(size: screenSize),
+          CenterWidget(size: screenSizes),
           const LoginContent(),
         ],
       ),
