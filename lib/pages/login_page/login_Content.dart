@@ -240,38 +240,44 @@ class _LoginContentState extends State<LoginContent>
   Widget build(BuildContext context) {
     final _theme = Theme.of(context);
     // const currentScreen = Screens.createAccount;
-    return Stack(
-      children: [
-        const Positioned(
-          top: 146,
-          left: 30,
-          child: TopText(),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 100),
-          child: Stack(
-            children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: createAccountContent,
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: loginContent,
-              ),
-            ],
+    return SingleChildScrollView(
+      physics: BouncingScrollPhysics(),
+      child: Stack(
+        children: [
+          const Positioned(
+            top: 136,
+            left: 30,
+            child: TopText(),
           ),
-        ),
-        const Align(
-          alignment: Alignment.bottomCenter,
-          child: Padding(
-            padding: EdgeInsets.only(bottom: 50),
-            child: BottomText(),
+          Padding(
+            padding: const EdgeInsets.only(top: 300),
+            child: SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
+              child: Stack(
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: createAccountContent,
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: loginContent,
+                  ),
+                ],
+              ),
+            ),
           ),
-        )
-      ],
+          const Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: EdgeInsets.only(bottom: 50),
+              child: BottomText(),
+            ),
+          )
+        ],
+      ),
     );
   }
 }
@@ -396,7 +402,7 @@ class ChangeScreenAnimation {
   static final List<Animation<Offset>> loginAnimations = [];
 
   static var isPlaying = false;
-  static var currentScreen = Screens.welcomeback;
+  static var currentScreen = Screens.createAccount;
 
   static Animation<Offset> _createAnimation({
     required Offset begin,
