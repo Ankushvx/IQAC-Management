@@ -241,7 +241,7 @@ class _LoginContentState extends State<LoginContent>
     final _theme = Theme.of(context);
     // const currentScreen = Screens.createAccount;
     return SingleChildScrollView(
-      physics: BouncingScrollPhysics(),
+      physics: const BouncingScrollPhysics(),
       child: Stack(
         children: [
           const Positioned(
@@ -252,7 +252,7 @@ class _LoginContentState extends State<LoginContent>
           Padding(
             padding: const EdgeInsets.only(top: 300),
             child: SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               child: Stack(
                 children: [
                   Column(
@@ -269,13 +269,13 @@ class _LoginContentState extends State<LoginContent>
               ),
             ),
           ),
-          const Align(
-            alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding: EdgeInsets.only(bottom: 50),
-              child: BottomText(),
-            ),
-          )
+          // const Align(
+          //   alignment: Alignment.bottomCenter,
+          //   child: Padding(
+          //     padding: EdgeInsets.only(top: 700),
+          //     child: BottomText(),
+          //   ),
+          // )
         ],
       ),
     );
