@@ -12,7 +12,6 @@ class AttendancePage extends StatefulWidget {
 class _AttendancePageState extends State<AttendancePage> {
   List<EventModel>? _eventModels;
   bool _isLoading = false;
-  @override
   bool get wantKeepAlive => true;
 
   @override
