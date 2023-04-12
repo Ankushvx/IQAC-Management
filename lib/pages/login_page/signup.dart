@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -29,44 +27,41 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
           Padding(
             padding: EdgeInsets.only(top: 300),
-            child: SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
-              child: Stack(
-                children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 36, vertical: 8),
-                        child: SizedBox(
-                          height: 50,
-                          child: Material(
-                            elevation: 8,
-                            shadowColor: Colors.black87,
-                            color: Colors.transparent,
-                            borderRadius: BorderRadius.circular(30),
-                            child: TextField(
-                              textAlignVertical: TextAlignVertical.bottom,
-                              decoration: InputDecoration(
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(30),
-                                  borderSide: BorderSide.none,
-                                ),
-                                // filled: true,
-                                // fillColor: Theme.of(context).focusColor, // Colors.white,
-                                //    hintText: hint,
-                                //   prefixIcon: Icon(iconData),
+            child: Stack(
+              children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 36, vertical: 8),
+                      child: SizedBox(
+                        height: 50,
+                        child: Material(
+                          elevation: 8,
+                          //  shadowColor: Colors.black87,
+                          // color: Colors.transparent,
+                          borderRadius: BorderRadius.circular(30),
+                          child: TextField(
+                            textAlignVertical: TextAlignVertical.bottom,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(30),
+                                borderSide: BorderSide.none,
                               ),
+                              // filled: true,
+                              // fillColor: Theme.of(context).focusColor, // Colors.white,
+                              //    hintText: hint,
+                              //   prefixIcon: Icon(iconData),
                             ),
                           ),
                         ),
                       ),
-                    ],
-                  ),
-                ],
-              ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
           // const Align(

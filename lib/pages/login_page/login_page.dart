@@ -59,17 +59,41 @@ class _LoginPageState extends State<LoginPage> {
       body: Stack(
         children: [
           Positioned(
-            top: -160,
-            left: -30,
-            child: topWidget(screenSize),
+            width: screenSize * 0.88,
+            height: screenSizes.height,
+            child: Container(
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(50),
+                    bottomRight: Radius.circular(50)),
+                gradient: LinearGradient(
+                  begin: Alignment(-0.0, -0.8),
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Color(0x803DE896),
+                    Color(0xB316BFC4),
+                  ],
+                ),
+              ),
+              child: const LoginContent(),
+            ),
           ),
           Positioned(
-            bottom: -160,
-            left: -40,
-            child: bottomWidget(screenSize),
+            // width: screenSize * 0.8,
+            top: screenSizes.height * 0.1,
+            right: screenSize * 0.2,
+            left: 0,
+            child: CircleAvatar(
+              radius: 35,
+              backgroundColor: Colors.white30,
+              child: Image.asset(
+                "assets/icons/ic_launchers.png",
+              ),
+            ),
           ),
-          CenterWidget(size: screenSizes),
-          const LoginContent(),
+
+          //CenterWidget(size: screenSizes),
+          //  const  LoginContent(),
         ],
       ),
     );
