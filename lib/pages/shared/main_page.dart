@@ -3,9 +3,7 @@ import 'package:portfilioapp/pages/Home/attendance.dart';
 import 'package:portfilioapp/pages/Home/home.dart';
 import 'package:portfilioapp/pages/Home/login.dart';
 import 'package:portfilioapp/pages/Home/user.dart';
-import '../../constants/apiconstants.dart';
 import '../../models/usermodel.dart';
-import '../../utils/http_utils.dart';
 import 'themes.dart';
 
 class MainPage extends StatefulWidget {
@@ -40,13 +38,10 @@ class _MainPageState extends State<MainPage> {
             onPressed: () {
               currentTheme.toggleTheme();
             },
-            icon: Icon(Icons.brightness_2_outlined),
+            icon: const Icon(Icons.brightness_2_outlined),
           ),
         ],
       ),
-      // drawer: const Drawer(
-      //   child: DrawerPage(),
-      // ),
       drawer: const DrawerPage(),
       body: PageView(
         onPageChanged: (index) {
@@ -55,7 +50,7 @@ class _MainPageState extends State<MainPage> {
           });
         },
         controller: _pageController,
-        children: const [HomePage(), AttendancePage(), UserPage()],
+        children: const [LoginPage(), HomePage(), AttendancePage(), UserPage()],
       ),
       bottomNavigationBar: BottomNavigationBar(
           unselectedFontSize: 13,
@@ -71,10 +66,10 @@ class _MainPageState extends State<MainPage> {
           showSelectedLabels: true,
           elevation: 0,
           items: const [
-            // BottomNavigationBarItem(
-            //     tooltip: "Menu", label: "Menu", icon: Icon(Icons.menu)),
             BottomNavigationBarItem(
-                tooltip: "Home", label: "Home", icon: Icon(Icons.home)),
+                tooltip: "Menu", label: "Menu", icon: Icon(Icons.menu)),
+            BottomNavigationBarItem(
+                tooltip: "Home", label: "Home", icon: Icon(Icons.apps)),
             BottomNavigationBarItem(
                 tooltip: "Home",
                 label: "Bar",
@@ -88,87 +83,53 @@ class _MainPageState extends State<MainPage> {
 
 class DrawerPage extends StatefulWidget {
   const DrawerPage({super.key});
-
   @override
   State<DrawerPage> createState() => _DrawerPageState();
 }
 
 class _DrawerPageState extends State<DrawerPage> {
-  UserModel? _userModel;
-  bool _isLoading = false;
-
-  @override
-  bool get wantKeepAlive => true;
-
-  @override
-  void initState() {
-    super.initState();
-    _getData();
-  }
-
-  void _getData() {
-    setState(() {
-      _isLoading = true;
-    });
-
-    ApisService().getUser().then((value) {
-      setState(() {
-        _userModel = value;
-      });
-    }).whenComplete(() {
-      setState(() {
-        _isLoading = false;
-      });
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    final _theme = Theme.of(context);
-
-    // super.build(context);
-    if (_isLoading) {
-      return const Center(
-        child: CircularProgressIndicator(),
-      );
-    }
-
-    if (_userModel == null) {
-      return const Center(
-        child: Text(
-          "Failed to load student details.",
-        ),
-      );
-    }
-
-    final userModel = _userModel!;
     return Drawer(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           DrawerHeader(
             decoration: const BoxDecoration(
-              image: DecorationImage(
+              image: DecorationImage( 
                 image: NetworkImage(
                     'https://images.unsplash.com/photo-1668587778654-e0babf8483b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80'),
                 fit: BoxFit.fill,
-              // image: DecorationImage(
-              //     fit: BoxFit.fill,
-              //     image: AssetImage('assets/images/drawerbg.avif')
-              //     // NetworkImage(
-              //     //   "https://images.unsplash.com/photo-1615716175455-9a098e2388be?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2487&q=80",
-              //     // ),
-              //     ),
-              gradient: LinearGradient(
-                colors: [Color(0xFF26A69A), Color(0xFF4DB6AC)],
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-                stops: [0.4, 0.8],
               ),
             ),
             padding: const EdgeInsets.all(0),
             child: Column(
-              children: <Widget>[
+              // ignore: prefer_const_literals_to_create_immutables
+              children: [
+                const SizedBox(
+                  height: 20,
+                ),
+                const CircleAvatar(
+                  backgroundColor: Colors.white70,
+                  minRadius: 38,
+                  child: CircleAvatar(
+                    radius: 35,
+                    backgroundImage: NetworkImage(
+                        "https://images.unsplash.com/photo-1573918651711-3b555ceac468?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2073&q=80"),
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                const Text(
+                  "Ankush Verma",
+                  style: TextStyle(
+                    fontFamily: 'Raleway',
+                    fontSize: 20,
+                    color: Colors.black87,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
                 const SizedBox(
                   height: 5,
                 ),
@@ -179,172 +140,45 @@ class _DrawerPageState extends State<DrawerPage> {
                     fontSize: 15,
                     color: Colors.black87,
                     fontWeight: FontWeight.w400,
-                  height: 10,
-                ),
-                CircleAvatar(
-                  backgroundColor: Colors.white70,
-                  minRadius: 42,
-                  child: CircleAvatar(
-                    radius: 35,
-                    backgroundImage: NetworkImage(
-                      ApiConstants.IMAGEHOST +
-                          userModel.photo.replaceAll('~/', ''),
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                Text(
-                  userModel.studentName,
-                  style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      //  color: Colors.white,
-                      overflow: TextOverflow.fade),
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                Text(
-                  userModel.contactNo,
-                  style: const TextStyle(
-                    //  fontFamily: 'Loto',
-                    fontWeight: FontWeight.bold,
-                    //  color: Colors.white,
-                    fontSize: 15,
                   ),
                 ),
               ],
             ),
-          ),
+          ), 
           //       // ignore: sort_child_properties_last
-          const SizedBox(
-            width: double.infinity,
-            child: UserAccountsDrawerHeader(
-              currentAccountPicture: CircleAvatar(
-                backgroundColor: Colors.white70,
-                child: CircleAvatar(
-                  radius: 32.0,
-                  backgroundImage: NetworkImage(
-                      "https://images.unsplash.com/photo-1573918651711-3b555ceac468?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2073&q=80"),
+         Builder(builder: (context) {
+            return Expanded(
+              child: ListView(
+                padding: EdgeInsets.zero,
+                children: [
+                  ListTile(
+                    onTap: () {
+                      setState(() {
+                        Navigator.pop(context);
+                      });
+                    },
+                    leading: const Icon(
+                      Icons.input,
+                      // color: Colors.cyan,
+                    ),
+                    title: const Text("Welcome",
+                        selectionColor: Colors.cyan,
+                        style: TextStyle(
+                          fontFamily: 'Raleway',
+                          fontSize: 20,
+                          //color: Colors.cyan
+                        )),
+                    //  tileColor: Colors.cyan,
+                  ),
+                ],
+ 
+                fit: BoxFit.fill,
+                image: NetworkImage(
+                  "https://images.unsplash.com/photo-1615716175455-9a098e2388be?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2487&q=80",
                 ),
               ),
-              accountName: Text(
-                "Ankush Verma",
-                style: TextStyle(fontFamily: 'Raleway'),
-              ),
-              accountEmail: Text(
-                "ankushkv2000@gmail.com",
-                style: TextStyle(fontFamily: 'Raleway'),
-              ),
             ),
-            // ignore: deprecated_member_use
-            //  decoration: BoxDecoration(color: _theme.accentColor),
-            // child: Text(
-            //     'Side Menu',
-            //     style: TextStyle(
-            //         fontFamily: 'Loto',
-            //         //  color: Colors.white,
-            //         fontSize: 25,
-            //         overflow: TextOverflow.fade),
-            //   ),
-          ),
-          // Builder(builder: (context) {
-          //   return Expanded(
-          //     child: ListView(
-          //       padding: EdgeInsets.zero,
-          //       children: [
-          //         ListTile(
-          //           onTap: () {
-          //             setState(() {
-          //               Navigator.pop(context);
-          //             });
-          //           },
-          //           leading: const Icon(
-          //             Icons.input,
-          //             // color: Colors.cyan,
-          //           ),
-          //           title: const Text("Welcome",
-          //               selectionColor: Colors.cyan,
-          //               style: TextStyle(
-          //                 fontFamily: 'Raleway',
-          //                 fontSize: 20,
-          //                 //color: Colors.cyan
-          //               )),
-          //           //  tileColor: Colors.cyan,
-          //         ),
-          //       ],
-
-          //       // fit: BoxFit.fill,
-          //       // image: NetworkImage(
-          //       //   "https://images.unsplash.com/photo-1615716175455-9a098e2388be?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2487&q=80",
-          //       // ),
-          //     ),
-          //   ),
-          //   },
-          //   padding: const EdgeInsets.all(0),
-          //   child: Column(
-          //     children: const [
-          //       SizedBox(
-          //         height: 10,
-          //       ),
-          //       CircleAvatar(
-          //         backgroundColor: Colors.white70,
-          //         minRadius: 42,
-          //         child: CircleAvatar(
-          //           radius: 35,
-          //           backgroundImage: NetworkImage(
-          //               'https://images.unsplash.com/photo-1559152840-089d9d5facbe?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80'),
-          //         ),
-          //       ),
-          //       SizedBox(
-          //         height: 5,
-          //       ),
-          //       Text(
-          //         'Ankush Verma ',
-          //         style: TextStyle(
-          //             fontFamily: 'Loto',
-          //             //  color: Colors.white,
-          //             fontSize: 18,
-          //             overflow: TextOverflow.fade),
-          //       ),
-          //       SizedBox(
-          //         height: 5,
-          //       ),
-          //       Text(
-          //         'ankushkv2000@gmail.com',
-          //         style: TextStyle(
-          //             fontFamily: 'Loto',
-          //             //  color: Colors.white,
-          //             fontSize: 15,
-          //             overflow: TextOverflow.fade),
-          //       ),
-          //     ],
-          //   ),
-          // ),
-          // Builder(builder: (context) {
-          //   return Expanded(
-          //     child: ListTile(
-          //       leading: const Icon(
-          //         Icons.input,
-          //         // color: Colors.cyan,
-          //       ),
-          //       title: const Text("Welcome",
-          //           selectionColor: Colors.cyan,
-          //           style: TextStyle(
-          //             fontFamily: 'Raleway',
-          //             fontSize: 20,
-          //             //color: Colors.cyan
-          //           )),
-          //       //  tileColor: Colors.cyan,
-          //       onTap: () {
-          //         Navigator.pop(context);
-          //       },
-
-          //     ),
-          //   );
-          // }),
+            })
           Builder(builder: (context) {
             return Expanded(
               child: ListTile(
@@ -363,6 +197,7 @@ class _DrawerPageState extends State<DrawerPage> {
                 onTap: () {
                   Navigator.pop(context);
                 },
+ 
               ),
             );
           }),
@@ -405,21 +240,5 @@ class _DrawerPageState extends State<DrawerPage> {
         ],
       ),
     );
-  }
-}
-
-class ApisService {
-  Future<UserModel?> getUser() async {
-    var response = await HttpUtils.postRequest(
-        url: ApiConstants.USER_PROFILE,
-        queryParameters: {
-          "StudentId": 22509,
-        });
-
-    if (response == null || response.data == null) {
-      return null;
-    }
-
-    return UserModel.fromJson(response.data);
   }
 }
