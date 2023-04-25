@@ -10,7 +10,7 @@
 		</data>
 		<key>flutter_assets/AssetManifest.json</key>
 		<data>
-		zMa9Jwd6MLAdCVY4knKgVEkaU0c=
+		X0Ez0suRrULA8J0rbinyq3fnGK8=
 		</data>
 		<key>flutter_assets/FontManifest.json</key>
 		<data>
@@ -20,10 +20,6 @@
 		<data>
 		ceIJCtatM+/0xEfEftiz4WNjG2Y=
 		</data>
-		<key>flutter_assets/assets/icons/.DS_Store</key>
-		<data>
-		hDu2BQZM7H3REPPk8zm0YV/7Jdc=
-		</data>
 		<key>flutter_assets/assets/icons/ic_launcher.png</key>
 		<data>
 		WxrppVLcqI89nq1wOLupMlvMch0=
@@ -31,10 +27,6 @@
 		<key>flutter_assets/assets/icons/ic_launchers.png</key>
 		<data>
 		pjV34ORt+rTOtPtWJp0bLlNznGE=
-		</data>
-		<key>flutter_assets/assets/images/.DS_Store</key>
-		<data>
-		rYMcNmXg+3NdHuCB0gWvjyqpGv8=
 		</data>
 		<key>flutter_assets/assets/images/apple_logo.jpg</key>
 		<data>
@@ -62,7 +54,7 @@
 		</data>
 		<key>flutter_assets/kernel_blob.bin</key>
 		<data>
-		744WB59pNo/Q3fl3MA0gbQH95I8=
+		DvBk+d3XiKUJ0WFTIWpHcPG6Xbw=
 		</data>
 		<key>flutter_assets/shaders/ink_sparkle.frag</key>
 		<data>
@@ -79,7 +71,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			6KwmrDTgdd12a7cZkD9y2btZC8eIcSEZWJdkbCv/9yc=
+			GLCtq1F0ucE9QFURuvjfASmDZXfJi8p5WWyJ16s0TlM=
 			</data>
 		</dict>
 		<key>flutter_assets/FontManifest.json</key>
@@ -156,7 +148,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			VVzjaak9qLeMiI8UBuJMl+HSPF3tY9kad0u5sTbrNtw=
+			h6op/V2y5GgQVUei8kZK1aSrNKBKmSQ0EZf5BdLj02g=
 			</data>
 		</dict>
 		<key>flutter_assets/shaders/ink_sparkle.frag</key>
