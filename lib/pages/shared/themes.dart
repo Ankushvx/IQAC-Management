@@ -16,7 +16,7 @@ class CustomTheme with ChangeNotifier {
 
   static ThemeData get lightTheme {
     return ThemeData(
-      // brightness: Brightness.light,
+      brightness: Brightness.light,
       primarySwatch: CompanyColors.teal,
       inputDecorationTheme: const InputDecorationTheme(
         filled: true,
@@ -32,7 +32,7 @@ class CustomTheme with ChangeNotifier {
           shadowColor: Colors.black87,
         ),
       ),
-      textTheme: TextTheme(bodyText1: TextStyle(color: Colors.black26)),
+      textTheme: TextTheme(bodyText1: TextStyle(color: Colors.black87)),
       buttonTheme: const ButtonThemeData(
         buttonColor: kSacondaryColer,
       ),
@@ -88,7 +88,7 @@ class CustomTheme with ChangeNotifier {
 class CompanyColors {
   CompanyColors._(); // this basically makes it so you can instantiate this class
 
-  static const _blackPrimaryValue = 0xFF64FFDA;
+  static const _blackPrimaryValue = 0xFF009688;
 
   static const MaterialColor teal = const MaterialColor(
     _blackPrimaryValue,

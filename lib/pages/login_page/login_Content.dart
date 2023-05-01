@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:portfilioapp/pages/login_page/Helper_function.dart';
+import 'package:portfilioapp/pages/login_page/signup.dart';
 import 'package:portfilioapp/utils/constants.dart';
-
-import '../shared/main_page.dart';
-import 'Helper_function.dart';
 
 enum Screens {
   createAccount,
@@ -86,7 +85,7 @@ class _LoginContentState extends State<LoginContent>
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const MainPage()),
+              MaterialPageRoute(builder: (context) => const SignUpPage()),
             );
           },
           // style: ElevatedButton.styleFrom(
@@ -240,38 +239,92 @@ class _LoginContentState extends State<LoginContent>
   Widget build(BuildContext context) {
     final _theme = Theme.of(context);
     // const currentScreen = Screens.createAccount;
-    return Stack(
-      children: [
-        const Positioned(
-          top: 146,
-          left: 30,
-          child: TopText(),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 100),
-          child: Stack(
+    return Padding(
+      // child:
+      // const Positioned(
+      //   top: 136,
+      //   left: 30,
+      //   child: TopText(),
+      // ),
+      //  Padding(
+      //padding: const EdgeInsets.only(top: 100),
+      padding: EdgeInsets.symmetric(
+          horizontal: MediaQuery.of(context).size.width * 0.14),
+      child: Stack(
+        children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            //crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: createAccountContent,
+              Spacer(),
+              TextFormField(
+                autocorrect: true,
+                obscureText: true,
+                // textAlignVertical: TextAlignVertical.bottom,
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30),
+                      borderSide: BorderSide.none,
+                    ),
+                    // filled: true,
+                    // fillColor: Theme.of(context).focusColor, // Colors.white,
+                    hintText: "Email Id",
+                    prefixIcon: const Icon(Icons.mail_outline)),
               ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: loginContent,
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 28),
+                child: TextFormField(
+                  autocorrect: true,
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30),
+                      borderSide: BorderSide.none,
+                    ),
+                    // filled: true,
+                    // fillColor: Theme.of(context).focusColor, // Colors.white,
+                    hintText: "Password",
+                    prefixIcon: const Icon(Icons.lock_outlined),
+                  ),
+                ),
               ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const SignUpPage()),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 40, vertical: 14),
+                  shape: const StadiumBorder(),
+                  //  primary: kPrimaryColor,
+                  elevation: 8,
+
+                  shadowColor: Colors.black87,
+                ),
+                child: Text("Login"),
+              ),
+              Spacer(flex: 2)
             ],
           ),
-        ),
-        const Align(
-          alignment: Alignment.bottomCenter,
-          child: Padding(
-            padding: EdgeInsets.only(bottom: 50),
-            child: BottomText(),
-          ),
-        )
-      ],
+
+          // Column(
+          //   mainAxisAlignment: MainAxisAlignment.center,
+          //   crossAxisAlignment: CrossAxisAlignment.stretch,
+          //   children: loginContent,
+          // ),
+        ],
+      ),
+      //  ),
+      // const Align(
+      //   alignment: Alignment.bottomCenter,
+      //   child: Padding(
+      //     padding: EdgeInsets.only(top: 700),
+      //     child: BottomText(),
+      //   ),
+      // )
     );
   }
 }
@@ -396,7 +449,7 @@ class ChangeScreenAnimation {
   static final List<Animation<Offset>> loginAnimations = [];
 
   static var isPlaying = false;
-  static var currentScreen = Screens.welcomeback;
+  static var currentScreen = Screens.createAccount;
 
   static Animation<Offset> _createAnimation({
     required Offset begin,

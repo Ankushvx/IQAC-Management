@@ -14,22 +14,23 @@ class _LoginPageState extends State<LoginPage> {
   Widget topWidget(double screenWidget) {
     return Transform.rotate(
       angle: -35 * math.pi / 180,
-      child: SingleChildScrollView(
-        child: Container(
-          width: 1.2 * screenWidget,
-          height: 1.2 * screenWidget,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(150),
-            gradient: const LinearGradient(
-              begin: Alignment(-0.2, -0.8),
-              end: Alignment.bottomCenter,
-              colors: [
-                Color(0x007CBFCF),
-                Color(0xB316BFC4),
-              ],
-            ),
+      //  child: SingleChildScrollView(
+      //  physics: BouncingScrollPhysics(),
+      child: Container(
+        width: 1.2 * screenWidget,
+        height: 1.2 * screenWidget,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(150),
+          gradient: const LinearGradient(
+            begin: Alignment(-0.2, -0.8),
+            end: Alignment.bottomCenter,
+            colors: [
+              Color(0x007CBFCF),
+              Color(0xB316BFC4),
+            ],
           ),
         ),
+        //  ),
       ),
     );
   }
@@ -52,23 +53,47 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
-
+    final screenSize = MediaQuery.of(context).size.width;
+    final screenSizes = MediaQuery.of(context).size;
     return Scaffold(
       body: Stack(
         children: [
           Positioned(
-            top: -160,
-            left: -30,
-            child: topWidget(screenSize.width),
+            width: screenSize * 0.88,
+            height: screenSizes.height,
+            child: Container(
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(50),
+                    bottomRight: Radius.circular(50)),
+                gradient: LinearGradient(
+                  begin: Alignment(-0.0, -0.8),
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Color(0x803DE896),
+                    Color(0xB316BFC4),
+                  ],
+                ),
+              ),
+              child: const LoginContent(),
+            ),
           ),
           Positioned(
-            bottom: -180,
-            left: -40,
-            child: bottomWidget(screenSize.width),
+            // width: screenSize * 0.8,
+            top: screenSizes.height * 0.1,
+            right: screenSize * 0.2,
+            left: 0,
+            child: CircleAvatar(
+              radius: 35,
+              backgroundColor: Colors.white30,
+              child: Image.asset(
+                "assets/icons/ic_launchers.png",
+              ),
+            ),
           ),
-          CenterWidget(size: screenSize),
-          const LoginContent(),
+
+          //CenterWidget(size: screenSizes),
+          //  const  LoginContent(),
         ],
       ),
     );
