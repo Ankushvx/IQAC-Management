@@ -96,7 +96,7 @@ class _DrawerPageState extends State<DrawerPage> {
         children: [
           DrawerHeader(
             decoration: const BoxDecoration(
-              image: DecorationImage( 
+              image: DecorationImage(
                 image: NetworkImage(
                     'https://images.unsplash.com/photo-1668587778654-e0babf8483b1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80'),
                 fit: BoxFit.fill,
@@ -144,41 +144,41 @@ class _DrawerPageState extends State<DrawerPage> {
                 ),
               ],
             ),
-          ), 
+          ),
           //       // ignore: sort_child_properties_last
-         Builder(builder: (context) {
+          Builder(builder: (context) {
             return Expanded(
-              child: ListView(
-                padding: EdgeInsets.zero,
-                children: [
-                  ListTile(
-                    onTap: () {
-                      setState(() {
-                        Navigator.pop(context);
-                      });
-                    },
-                    leading: const Icon(
-                      Icons.input,
-                      // color: Colors.cyan,
-                    ),
-                    title: const Text("Welcome",
-                        selectionColor: Colors.cyan,
-                        style: TextStyle(
-                          fontFamily: 'Raleway',
-                          fontSize: 20,
-                          //color: Colors.cyan
-                        )),
-                    //  tileColor: Colors.cyan,
+                child: ListView(
+              padding: EdgeInsets.zero,
+              children: [
+                ListTile(
+                  onTap: () {
+                    setState(() {
+                      Navigator.pop(context);
+                    });
+                  },
+                  leading: const Icon(
+                    Icons.input,
+                    // color: Colors.cyan,
                   ),
-                ],
- 
-                fit: BoxFit.fill,
-                image: NetworkImage(
-                  "https://images.unsplash.com/photo-1615716175455-9a098e2388be?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2487&q=80",
+                  title: const Text("Welcome",
+                      selectionColor: Colors.cyan,
+                      style: TextStyle(
+                        fontFamily: 'Raleway',
+                        fontSize: 20,
+                        //color: Colors.cyan
+                      )),
+                  //  tileColor: Colors.cyan,
                 ),
-              ),
-            ),
-            })
+              ],
+
+              // fit: BoxFit.fill,
+              // image: NetworkImage(
+              //   "https://images.unsplash.com/photo-1615716175455-9a098e2388be?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2487&q=80",
+              // ),
+              //  ),
+            ));
+          }),
           Builder(builder: (context) {
             return Expanded(
               child: ListTile(
@@ -197,7 +197,6 @@ class _DrawerPageState extends State<DrawerPage> {
                 onTap: () {
                   Navigator.pop(context);
                 },
- 
               ),
             );
           }),
