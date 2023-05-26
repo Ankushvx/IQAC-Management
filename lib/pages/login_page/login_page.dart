@@ -27,6 +27,7 @@ class _LoginPageState extends State<LoginPage> {
             colors: [
               Color(0x007CBFCF),
               Color(0xB316BFC4),
+              Color(0xB316BFC4),
             ],
           ),
         ),
@@ -46,6 +47,7 @@ class _LoginPageState extends State<LoginPage> {
               end: Alignment(0.7, 0.8),
               colors: [
                 Color(0xBD4BE8CC),
+              Color(0xB316BFC4),
                 Color(0x005CDBCF),
               ])),
     );
