@@ -1,4 +1,4 @@
-class ApiConstants {
+mixin ApiConstants {
   static const String _SCHEMA = "http://";
   static const String _HOST = "192.168.60.4:200";
   static const String _API_BASE = "/api/v1";
