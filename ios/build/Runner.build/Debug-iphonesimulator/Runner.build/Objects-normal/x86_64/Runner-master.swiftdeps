@@ -1,6 +1,6 @@
 version: "Apple Swift version 5.7.2 (swiftlang-5.7.2.135.5 clang-1400.0.29.51)"
-options: "db79fe9817850705482d12c0873b2cab77b3df463a6a09eccaa20a3b285d33da"
-build_start_time: [1681319021, 577208042]
-build_end_time: [1681319021, 600491046]
+options: "b1274326329c390fbded86d16a52f9fc31a473484821b2688449cacb9312070f"
+build_start_time: [1681320051, 175855159]
+build_end_time: [1681320051, 192442893]
 inputs:
-  "/Users/ankushverma/Development/test/portfilioapp/ios/Runner/AppDelegate.swift": !private [1681319008, 805250167]
+  "/Users/ankushverma/Development/test/IQAC/IQAC-Management/ios/Runner/AppDelegate.swift": !private [1681319873, 395058393]
